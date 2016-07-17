@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .social-btn {
-  width: 70px;
+  width: 200px;
   height: 30px;
   color: white;
   background-color: #3B5998;
@@ -11,9 +11,9 @@
   font-weight: bold;
   font-size: 11px;
   padding: 5px;
-  margin-top: 300px;
   border: 2px solid black;
   position: relative;
   box-shadow: inset 0 1px 1px white;
-  text-align: center
+  text-align: center;
+  display: block;
 }
