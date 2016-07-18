@@ -12,10 +12,16 @@ end
 # #2
 group :development do
   gem 'sqlite3'
-end
+  gem 'better_errors' # Enhanced Rails error page with built in rails console
+  gem 'binding_of_caller' #Required by better_errors
+  gem 'quiet_assets' # Less noisy but easier to debug server output
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
+  gem 'pry-rails' # allows call to binding.pry to "pry open" running code
+  gem 'pry-doc' # enables viewing of Ruby core source+docs in pry
+  gem 'pry-inline' # automatically shows variable values inline in rails console
+  gem 'rb-readline' # rb-readline makes pry history behave on all platforms
 end
 
 # Use SCSS for stylesheets
