@@ -15,6 +15,7 @@ group :development do
   gem 'better_errors' # Enhanced Rails error page with built in rails console
   gem 'binding_of_caller' #Required by better_errors
   gem 'quiet_assets' # Less noisy but easier to debug server output
+end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
