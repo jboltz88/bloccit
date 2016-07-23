@@ -23,6 +23,7 @@ group :development, :test do
   gem 'pry-doc' # enables viewing of Ruby core source+docs in pry
   gem 'pry-inline' # automatically shows variable values inline in rails console
   gem 'rb-readline' # rb-readline makes pry history behave on all platforms
+  gem 'shoulda'
 end
 
 # Use SCSS for stylesheets
