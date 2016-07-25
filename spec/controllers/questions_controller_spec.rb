@@ -52,8 +52,8 @@ RSpec.describe QuestionsController, type: :controller do
       expect{post :create, question: {title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: RandomData.random_bool}}.to change(Question, :count).by(1)
     end
 
-    it "assigns the new post to @post" do
-      post :create, post: {title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: RandomData.random_bool}
+    it "assigns the new post to @question" do
+      post :create, question: {title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: RandomData.random_bool}
       expect(assigns(:question)).to eq Question.last
     end
 
