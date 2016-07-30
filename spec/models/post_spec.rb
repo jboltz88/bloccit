@@ -32,6 +32,13 @@ RSpec.describe Post, type: :model do
     end
   end
 
+  describe "create_vote callback" do
+    it "triggers create_vote after post create" do
+      expect(post).to receive(:create_vote).at_least(:once)
+      topic.posts.create!(title: title, body: body, user: user)
+    end
+  end
+
   describe "voting" do
     before do
       3.times { post.votes.create!(value: 1) }
