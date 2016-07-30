@@ -1,0 +1,4 @@
+Your new post: "<%= @post.title %>"
+<%= "=" * (@post.title.length + 12) %> has been favorited. You will now recieve updates for future comments!
+
+Visit online at: <%= topic_post_url(@post.topic, @post) %>
