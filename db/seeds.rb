@@ -35,6 +35,14 @@ posts = Post.all
   )
 end
 
+20.times do
+  Comment.create!(
+    user: users.sample,
+    topic: topics.sample,
+    body: RandomData.random_sentence
+  )
+end
+
 admin = User.create!(
   name:     'Admin User',
   email:    'admin@example.com',
@@ -52,4 +60,4 @@ puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
-puts "#{Comment.count} comments created"
+puts "#{Comment.count} post comments created"
