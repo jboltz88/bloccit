@@ -24,6 +24,7 @@ group :development, :test do
   gem 'pry-inline' # automatically shows variable values inline in rails console
   gem 'rb-readline' # rb-readline makes pry history behave on all platforms
   gem 'shoulda'
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 # Use SCSS for stylesheets
