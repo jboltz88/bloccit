@@ -6,8 +6,7 @@ class CommentsController < ApplicationController
     if params[:topic_id]
       @topic = Topic.find(params[:topic_id])
       comment = @topic.comments.new(comment_params)
-    end
-    if params[:post_id]
+    elsif params[:post_id]
       @post = Post.find(params[:post_id])
       comment = @post.comments.new(comment_params)
     end
@@ -15,10 +14,10 @@ class CommentsController < ApplicationController
 
     if comment.save
       flash[:notice] = "Comment saved successfully."
-      redirect_to topics_path
+      redirect_to :back
     else
       flash[:alert] = "Comment failed to save."
-      redirect_to topics_path
+      redirect_to :back
     end
   end
 
@@ -34,10 +33,10 @@ class CommentsController < ApplicationController
 
     if comment.destroy
       flash[:notice] = "Comment was deleted successfully."
-      redirect_to topics_path
+      redirect_to :back
     else
       flash[:alert] = "Comment couldn't be deleted."
-      redirect_to topics_path
+      redirect_to :back
     end
   end
 
