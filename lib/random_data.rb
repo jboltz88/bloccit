@@ -33,4 +33,9 @@ module RandomData
   def self.random_email
     "#{random_word}@#{random_word}.#{random_word}"
   end
+
+  def self.random_vote
+    vote_options = [-1, 1]
+    vote_options[rand(0..1)]
+  end
 end
