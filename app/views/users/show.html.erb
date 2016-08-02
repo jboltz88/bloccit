@@ -28,3 +28,10 @@
 <% else %>
   <h4><%= "#{@user.name} has not submitted any posts yet." %></h4>
 <% end %>
+
+<% if @user.favorites.length > 0 %>
+  <h2>Favorites</h2>
+  <p>
+  <%= render @user.favorite_posts %>
+  </p> 
+<% end %>
