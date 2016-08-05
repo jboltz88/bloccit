@@ -1,8 +1,7 @@
 class Api::V1::PostsController < Api::V1::BaseController
-  p "before auth"
   before_action :authenticate_user
   before_action :authorize_user
-  p "after authenticate and authorize"
+  
   def update
     post = Post.find(params[:id])
 
@@ -14,23 +13,15 @@ class Api::V1::PostsController < Api::V1::BaseController
   end
 
   def create
-    p "in create method"
-    p "find topic with id:", params[:id]
     topic = Topic.find(params[:topic_id])
-    p "found topic:", topic
     post = topic.posts.build(post_params)
-    p "after post build:"
     post.user = current_user
     
 
     if post.valid?
-
-      p "post is valid"
       post.save!
       render json: post, status: 201
     else
-      p post.errors
-      p "post is invalid"
       render json: {error: "Post is invalid", status: 400}, status: 400
     end
   end
@@ -50,7 +41,6 @@ class Api::V1::PostsController < Api::V1::BaseController
   private
 
   def post_params
-    p "in post params"
-    params.require(:post).permit(:title, :body, :topic_id)
+    params.require(:post).permit(:title, :body)
   end
 end
