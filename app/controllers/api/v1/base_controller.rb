@@ -3,6 +3,10 @@ class Api::V1::BaseController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from ActionController::ParameterMissing, with: :malformed_request
 
+  def current_user
+    @current_user
+  end
+
   def authenticate_user
     authenticate_or_request_with_http_token do |token, options|
       @current_user = User.find_by(auth_token: token)
