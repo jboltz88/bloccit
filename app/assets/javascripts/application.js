@@ -27,9 +27,7 @@ blocmetrics.report = function(eventName){
 }
 
 $(document).ready(function() {
-  console.log("loaded");
   $('.media-heading').on('click', function(){
-    console.log("clicked");
     blocmetrics.report("click");
   });
 });
