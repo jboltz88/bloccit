@@ -13,13 +13,8 @@
 
 ActiveRecord::Schema.define(version: 20160802001307) do
 
-  create_table "advertisements", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -27,12 +22,10 @@ ActiveRecord::Schema.define(version: 20160802001307) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
-    t.integer  "topic_id"
   end
 
-  add_index "comments", ["post_id"], name: "index_comments_on_post_id"
-  add_index "comments", ["topic_id"], name: "index_comments_on_topic_id"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id"
@@ -41,8 +34,8 @@ ActiveRecord::Schema.define(version: 20160802001307) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "favorites", ["post_id"], name: "index_favorites_on_post_id"
-  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
+  add_index "favorites", ["post_id"], name: "index_favorites_on_post_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "labelings", force: :cascade do |t|
     t.integer  "label_id"
@@ -52,8 +45,8 @@ ActiveRecord::Schema.define(version: 20160802001307) do
     t.datetime "updated_at",     null: false
   end
 
-  add_index "labelings", ["label_id"], name: "index_labelings_on_label_id"
-  add_index "labelings", ["labelable_type", "labelable_id"], name: "index_labelings_on_labelable_type_and_labelable_id"
+  add_index "labelings", ["label_id"], name: "index_labelings_on_label_id", using: :btree
+  add_index "labelings", ["labelable_type", "labelable_id"], name: "index_labelings_on_labelable_type_and_labelable_id", using: :btree
 
   create_table "labels", force: :cascade do |t|
     t.string   "name"
@@ -72,27 +65,8 @@ ActiveRecord::Schema.define(version: 20160802001307) do
     t.float    "rank"
   end
 
-  add_index "posts", ["topic_id"], name: "index_posts_on_topic_id"
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
-
-  create_table "questions", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.boolean  "resolved"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sponsored_posts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "topic_id"
-  end
-
-  add_index "sponsored_posts", ["topic_id"], name: "index_sponsored_posts_on_topic_id"
+  add_index "posts", ["topic_id"], name: "index_posts_on_topic_id", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"
@@ -120,7 +94,14 @@ ActiveRecord::Schema.define(version: 20160802001307) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "votes", ["post_id"], name: "index_votes_on_post_id"
-  add_index "votes", ["user_id"], name: "index_votes_on_user_id"
+  add_index "votes", ["post_id"], name: "index_votes_on_post_id", using: :btree
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
 
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "favorites", "posts"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "labelings", "labels"
+  add_foreign_key "votes", "posts"
+  add_foreign_key "votes", "users"
 end
